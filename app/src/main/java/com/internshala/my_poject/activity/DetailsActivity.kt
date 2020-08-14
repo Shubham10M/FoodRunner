@@ -36,7 +36,7 @@ import kotlin.coroutines.EmptyCoroutineContext.toString
 class DetailsActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var textmenu: TextView
-    lateinit var menuIcon: TextView
+    lateinit var menuIcon: ImageView
     lateinit var textNo: TextView
     lateinit var textRestro1: TextView
     lateinit var textcost: TextView
@@ -45,7 +45,7 @@ class DetailsActivity : AppCompatActivity() {
     lateinit var btnadd: Button
     lateinit var btnaddTocart: Button
 
-    var restaurantId: String? = null
+    var restaurantId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,12 +62,12 @@ class DetailsActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         progressLayout = findViewById(R.id.progressLayout)
         progressLayout.visibility = View.VISIBLE
-        btnadd = findViewById(R.id.add)
+        btnadd = findViewById(R.id.btnadd)
         btnaddTocart = findViewById(R.id.btnaddTocart)
         textcost = findViewById(R.id.textCost)
 
         if (intent != null && intent.hasExtra("id")) {
-            restaurantId = intent.getStringExtra("id")
+            restaurantId = intent.getIntExtra("id",0)
         } else {
             finish()
             Toast.makeText(
@@ -96,7 +96,7 @@ class DetailsActivity : AppCompatActivity() {
 
 
                             val RestaurantEntity = RestaurantEntity(
-                                restaurantId?.toInt() as Int,
+                                restaurantId,
                                 textNo.text.toString(),
                                 textRestro1.text.toString(),
                                 textcost.text.toString(),
