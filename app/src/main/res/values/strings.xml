@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My_Poject</string>
+    <string name="app_name">FOOD RUNNER</string>
     <string name="next">Next</string>
     <string name="email">Email Address</string>
     <string name="enter_your_registered_mobile_number_and_email_below">Enter your registered mobile number and email below</string>
@@ -31,4 +31,5 @@
     <string name="you_do_not_have_any_favorite_restaurants">You do not have any favorite restaurants</string>
     <string name="name">Name</string>
     <string name="dummy_phone">+91 53i871933</string>
+    <string name="rs_300_person">Rs. 300/person</string>
 </resources>

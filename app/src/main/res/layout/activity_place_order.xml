@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/llcontent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".activity.PlaceOrderActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+    <TextView
+        android:id="@+id/ordering_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ordering From : "
+        android:layout_below="@+id/toolbar"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
+    <View
+        android:id="@+id/firstview"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/ordering_from"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorPrimary"/>
+
+     <View
+         android:id="@+id/small_view"
+         android:layout_width="match_parent"
+         android:layout_height="4dp"
+         android:layout_below="@+id/firstview"
+         android:layout_marginTop="20dp"
+         android:background="@color/colorPrimary"
+        android:layout_marginRight="380dp"
+         android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Item name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="9dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginLeft="35dp"/>
+
+    <TextView
+        android:id="@+id/rupees"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Rs. 200"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginRight="10dp"
+        android:textSize="19sp"
+        android:textStyle="bold"/>
+
+<Button
+    android:id="@+id/total_rs"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:padding="16dp"
+    android:background="@color/colorPrimary"
+    android:text="Place Order (total Rs . )"
+    android:textColor="#ffffff"
+    android:textStyle="bold"
+    android:textSize="18sp"/>
+
+</RelativeLayout>

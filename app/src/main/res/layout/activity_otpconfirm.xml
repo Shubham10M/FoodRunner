@@ -27,6 +27,7 @@
         android:padding="10dp"
         android:layout_margin="8dp"
        android:hint="@string/otp_4_characters"
+        android:maxLines="4"
         />
     <EditText
         android:id="@+id/etnewPassward"
@@ -37,6 +38,7 @@
         android:padding="10dp"
         android:layout_margin="8dp"
         android:hint="@string/new_password_min_4_characters"
+        android:maxLines="4"
         />
 
     <EditText

@@ -33,7 +33,14 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
-
+/*
+* 1. git add .
+* 2. git commit -m "your message"
+* 3. git push -u origin your_branch_name
+*
+*< For pull not for use its just a heading>
+* 4. git pull origin  your_branch_name
+* */
 class DashboardFragment : Fragment() {
 
 //    private lateinit var recyclerRestaurant: RecyclerView

@@ -2,6 +2,7 @@ package com.internshala.my_poject.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.media.Image
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -65,6 +66,11 @@ class DetailsActivity : AppCompatActivity() {
         btnadd = findViewById(R.id.btnadd)
         btnaddTocart = findViewById(R.id.btnaddTocart)
         textcost = findViewById(R.id.textCost)
+
+        btnaddTocart.setOnClickListener {
+            val intent = Intent(this@DetailsActivity, PlaceOrderActivity::class.java)
+            startActivity(intent)
+        }
 
         if (intent != null && intent.hasExtra("id")) {
             restaurantId = intent.getIntExtra("id",0)
@@ -187,7 +193,7 @@ class DetailsActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 this@DetailsActivity,
-                                "some error occured",
+                                "some error occured in details activity",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -196,7 +202,7 @@ class DetailsActivity : AppCompatActivity() {
                     } catch (e: Exception) {
                         Toast.makeText(
                             this@DetailsActivity,
-                            "some error occured",
+                            "some  catch error occured",
                             Toast.LENGTH_SHORT
                         )
                             .show()

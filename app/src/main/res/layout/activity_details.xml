@@ -100,7 +100,7 @@
         android:padding="10dp"
         android:layout_margin="10dp"
         android:background="@color/colorPrimary"
-        android:hint="Add to Favourites"
+        android:hint="Proceed To Cart"
         android:textColorHint="#ffffff"
         android:textSize="20sp"
         android:textStyle="bold"/>
