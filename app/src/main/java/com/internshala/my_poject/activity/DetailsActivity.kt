@@ -1,71 +1,51 @@
 package com.internshala.my_poject.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.room.Room
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.internshala.my_poject.R
-import com.internshala.my_poject.adapter.RestaurentsAdapter
+import com.internshala.my_poject.api.ApiClient
+import com.internshala.my_poject.api.ApiInterface
 import com.internshala.my_poject.database.RestaurantDatabase
 import com.internshala.my_poject.database.RestaurantEntity
+import com.internshala.my_poject.model.Example
 import com.internshala.my_poject.util.ConnectionManager
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.toolbar.view.*
-
-import org.json.JSONObject
-import java.util.Arrays.toString
-import java.util.HashMap
-import kotlin.Unit.toString
-import kotlin.coroutines.EmptyCoroutineContext.toString
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailsActivity : AppCompatActivity() {
-    lateinit var toolbar: Toolbar
-    lateinit var textmenu: TextView
-    lateinit var menuIcon: ImageView
-    lateinit var textNo: TextView
-    lateinit var textRestro1: TextView
-    lateinit var textcost: TextView
-    lateinit var progressLayout: RelativeLayout
-    lateinit var progressBar: ProgressBar
-    lateinit var btnadd: Button
-    lateinit var btnaddTocart: Button
 
-    var restaurantId: Int = 0
+    var restaurantId: String? = null
+    private val request = ApiClient.buildService(ApiInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        toolbar = findViewById(R.id.toolbar)
+//        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Restaurant Details"
-        textmenu = findViewById(R.id.textmenu)
-        menuIcon = findViewById(R.id.menuIcon)
-        textNo = findViewById(R.id.textNo)
-        textRestro1 = findViewById(R.id.textRestro1)
-        progressBar = findViewById(R.id.progressBar)
-        progressBar.visibility = View.VISIBLE
-        progressLayout = findViewById(R.id.progressLayout)
-        progressLayout.visibility = View.VISIBLE
-        btnadd = findViewById(R.id.btnadd)
-        btnaddTocart = findViewById(R.id.btnaddTocart)
-        textcost = findViewById(R.id.textCost)
+
+//        textmenu = findViewById(R.id.textmenu)
+//        menuIcon = findViewById(R.id.menuIcon)
+//        textNo = findViewById(R.id.textNo)
+//        textRestro1 = findViewById(R.id.textRestro1)
+//        progressBar = findViewById(R.id.progressBar)
+//        progressBar.visibility = View.VISIBLE
+//        progressLayout = findViewById(R.id.progressLayout)
+//        progressLayout.visibility = View.VISIBLE
+//        btnadd = findViewById(R.id.btnadd)
+//        btnaddTocart = findViewById(R.id.btnaddTocart)
+//        textcost = findViewById(R.id.textCost)
 
         btnaddTocart.setOnClickListener {
             val intent = Intent(this@DetailsActivity, PlaceOrderActivity::class.java)
@@ -73,7 +53,7 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         if (intent != null && intent.hasExtra("id")) {
-            restaurantId = intent.getIntExtra("id",0)
+            restaurantId = intent.getStringExtra("id")
         } else {
             finish()
             Toast.makeText(
@@ -84,14 +64,32 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         if (ConnectionManager().isNetworkAvailable(this@DetailsActivity)) {
-            val queue = Volley.newRequestQueue(this@DetailsActivity)
+            progressLayout.visibility = View.VISIBLE
+
+            val call = request.fetchRestaurantsItems("9bf534118365f1", restaurantId ?: "")
+            call.enqueue(object : Callback<Example> {
+                override fun onResponse(call: Call<Example>, response: Response<Example>) {
+                    progressLayout.visibility = View.GONE
+                }
+
+                override fun onFailure(call: Call<Example>, t: Throwable) {
+                    progressLayout.visibility = View.GONE
+                    Toast.makeText(
+                        this@DetailsActivity,
+                        "Failed to fetch list Reason: $t",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+
+            /* val queue = Volley.newRequestQueue(this@DetailsActivity)
             val url = "http://13.235.250.119/v2/restaurants/fetch_result/id"
             val jsonparams = JSONObject()
-            jsonparams.put("restaurantid", restaurantId)
+            jsonparams.put("restaurant_id", restaurantId)
             val jsonRequest =
                 object : JsonObjectRequest(Request.Method.GET, url, jsonparams, Response.Listener {
                     try {
-                        val success = it.getBoolean("success")
+                        val success = it.get("success") as Boolean
                         if (success) {
                             val restaurantJsonObject = it.getJSONObject("restaurant_data")
                             val restaurantImageUrl = restaurantJsonObject.getString("image")
@@ -220,7 +218,7 @@ class DetailsActivity : AppCompatActivity() {
                         return headers
                     }
                 }
-            queue.add(jsonRequest)
+            queue.add(jsonRequest)*/
         } else {
             val builder = AlertDialog.Builder(this@DetailsActivity)
             builder.setTitle("Error")

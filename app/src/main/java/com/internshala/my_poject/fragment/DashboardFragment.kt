@@ -4,34 +4,30 @@ import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.internshala.my_poject.R
 import com.internshala.my_poject.adapter.RestaurentsAdapter
+import com.internshala.my_poject.api.ApiClient
+import com.internshala.my_poject.api.ApiInterface
 import com.internshala.my_poject.database.RestaurantDatabase
-import com.internshala.my_poject.model.Restaurant
+import com.internshala.my_poject.model.Datum
+import com.internshala.my_poject.model.Example
 import com.internshala.my_poject.util.ConnectionManager
-import com.internshala.my_poject.util.FETCH_RESTAURANTS_URL
-import org.json.JSONException
-import org.json.JSONObject
-import java.util.*
+import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.android.synthetic.main.activity_details.progressBar
+import kotlinx.android.synthetic.main.fragment_dashboard.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /*
 * 1. git add .
@@ -43,11 +39,14 @@ import java.util.*
 * */
 class DashboardFragment : Fragment() {
 
-//    private lateinit var recyclerRestaurant: RecyclerView
-    private lateinit var restaurentsAdapter: RestaurentsAdapter
-    private var restaurantList = arrayListOf<Restaurant>()
-    private lateinit var progressBar: ProgressBar
-//    private lateinit var rlLoading: RelativeLayout
+    //    private lateinit var recyclerRestaurant: RecyclerView
+    private val restaurentsAdapter by lazy {
+        RestaurentsAdapter()
+    }
+//    private var restaurantList = arrayListOf<Restaurant>()
+
+    //    private lateinit var rlLoading: RelativeLayout
+    private val request = ApiClient.buildService(ApiInterface::class.java)
 
 
     override fun onCreateView(
@@ -60,31 +59,70 @@ class DashboardFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        progressBar = view.findViewById(R.id.progressBar) as ProgressBar
-//        rlLoading = view.findViewById(R.id.rlLoading) as RelativeLayout
-//        rlLoading.visibility = View.VISIBLE
-
         setUpRecycler(view)
     }
 
     private fun setUpRecycler(view: View) {
-        val recyclerRestaurant:RecyclerView = view.findViewById(R.id.recyclerRestaurant)
-        val mLayoutManager = LinearLayoutManager(activity)
-        recyclerRestaurant.layoutManager = mLayoutManager
-        recyclerRestaurant.itemAnimator = DefaultItemAnimator()
-        restaurentsAdapter = RestaurentsAdapter()
-        recyclerRestaurant.adapter = restaurentsAdapter
+        recyclerRestaurant?.apply {
+            layoutManager = LinearLayoutManager(activity)
+            itemAnimator = DefaultItemAnimator()
+            recyclerRestaurant.adapter = restaurentsAdapter
+        }
+        // show progress
+        progressBar.visibility = View.VISIBLE
 
+//        val mLayoutManager = LinearLayoutManager(activity)
+//        recyclerRestaurant.layoutManager = mLayoutManager
+//        recyclerRestaurant.itemAnimator = DefaultItemAnimator()
+//        restaurentsAdapter = RestaurentsAdapter()
+//        recyclerRestaurant.adapter = restaurentsAdapter
 //        val restaurant = Restaurant(1212,"Test Name","5",1000,"ab")
 //                                restaurantList.add(restaurant)
 //                                restaurentsAdapter.restaurants=restaurantList
 
-        val queue = Volley.newRequestQueue(activity as Context)
+//        val queue = Volley.newRequestQueue(activity as Context)
+
         if (ConnectionManager().isNetworkAvailable(activity as Context)) {
             //get the list of favourites food here from the db and compare with the food item's id.
             val listOfFavourites = GetAllFavAsyncTask(context!!).execute().get()
+
+            val call = request.fetchRestaurants("9bf534118365f1")
+            call.enqueue(object : Callback<Example> {
+                override fun onResponse(call: Call<Example>, response: Response<Example>) {
+                    progressBar.visibility = View.GONE
+                    recyclerRestaurant.visibility = View.VISIBLE
+
+                    if (response.isSuccessful) {
+                        response.body()?.data?.data?.let {
+                            listOfFavourites?.let { fabList ->
+                                for (i in it.indices) {
+                                    for (j in fabList.indices) {
+                                        //if Ids match anywhere in the list then add true value in restaurant item
+                                        if (it[i].id == fabList[j].toString()) {
+                                            it[i].isFavourite = true
+                                        }
+                                    }
+                                }
+
+                            }
+                            restaurentsAdapter.restaurants = it as ArrayList<Datum>
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Example>, t: Throwable) {
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to fetch list Reason: $t",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+
+
             /*Create a JSON object request*/
-            val jsonObjectRequest = object : JsonObjectRequest(
+            /*val jsonObjectRequest = object : JsonObjectRequest(
                 Request.Method.GET,
                 FETCH_RESTAURANTS_URL,
                 null,
@@ -92,7 +130,7 @@ class DashboardFragment : Fragment() {
 //                    rlLoading.visibility = View.GONE
                     progressBar.visibility = View.GONE
                     recyclerRestaurant.visibility = View.VISIBLE
-                    /*Once response is obtained, parse the JSON accordingly*/
+                    *//*Once response is obtained, parse the JSON accordingly*//*
                     try {
                         Log.e("data", restaurantList.toString())
                         val data = it.getJSONObject("data")
@@ -143,7 +181,7 @@ class DashboardFragment : Fragment() {
                 }
             }
 
-            queue.add(jsonObjectRequest)
+            queue.add(jsonObjectRequest)*/
 
         } else {
             val builder = AlertDialog.Builder(activity as Context)
@@ -159,11 +197,11 @@ class DashboardFragment : Fragment() {
 
     }
 
-//comment always why you are writing it and what is the use of this function,class or variable.
+    //comment always why you are writing it and what is the use of this function,class or variable.
     class GetAllFavAsyncTask(
         context: Context
     ) : AsyncTask<Void, Void, List<Int>>() {
-        val db = Room.databaseBuilder(context, RestaurantDatabase::class.java,"res-db").build()
+        val db = Room.databaseBuilder(context, RestaurantDatabase::class.java, "res-db").build()
         override fun doInBackground(vararg params: Void?): List<Int> {
 
             val list = db.restaurantDao().getAllRestaurants()

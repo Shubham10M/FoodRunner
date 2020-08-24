@@ -3,36 +3,31 @@ package com.internshala.my_poject.adapter
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
-import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.internshala.my_poject.R
 import com.internshala.my_poject.activity.DetailsActivity
 import com.internshala.my_poject.database.RestaurantDatabase
 import com.internshala.my_poject.database.RestaurantEntity
-import com.internshala.my_poject.model.Restaurant
+import com.internshala.my_poject.model.Datum
 import com.squareup.picasso.Picasso
 
-class RestaurentsAdapter : RecyclerView.Adapter<RestaurentsAdapter.DashboardViewHolder>() {
-    var restaurants: ArrayList<Restaurant> = arrayListOf()
-        get()=field
+class RestaurentsAdapter() : RecyclerView.Adapter<RestaurentsAdapter.DashboardViewHolder>() {
+    var restaurants: ArrayList<Datum> = arrayListOf()
         set(value) {
-            field=value
+            field = value
             notifyDataSetChanged()
         }
-    private lateinit var context:Context
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
-        context=parent.context
+        context = parent.context
         val view = LayoutInflater.from(context)
             .inflate(R.layout.recycler_dashboard_single_row, parent, false)
 
@@ -51,49 +46,45 @@ class RestaurentsAdapter : RecyclerView.Adapter<RestaurentsAdapter.DashboardView
 
 
     inner class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-         var  textRestro: TextView
-         var  imgisfav: ImageView
-         var  textCost: TextView
-         var  textRating: TextView
-         var  imgRestaurent: ImageView
-         var cardRestaurant: CardView
+        private var textRestro: TextView = view.findViewById(R.id.textRestro)
+        private var imgisfav: ImageView = view.findViewById(R.id.imgIsFav)
+        private var textCost: TextView = view.findViewById(R.id.textCost)
+        private var textRating: TextView = view.findViewById(R.id.textRating)
+        private var imgRestaurent: ImageView = view.findViewById(R.id.imgRestaurent)
+        private var cardRestaurant: CardView = view.findViewById(R.id.cardRestaurant)
 
         init {
-             textRestro = view.findViewById(R.id.textRestro)
-             imgisfav = view.findViewById(R.id.imgIsFav)
-             textCost = view.findViewById(R.id.textCost)
-             textRating = view.findViewById(R.id.textRating)
-             imgRestaurent= view.findViewById(R.id.imgRestaurent)
-             cardRestaurant = view.findViewById(R.id.cardRestaurant)
-
             imgisfav.setOnClickListener {
-                restaurants.get(adapterPosition).isFavourite = !restaurants.get(adapterPosition).isFavourite
+                restaurants[adapterPosition].isFavourite =
+                    !restaurants[adapterPosition].isFavourite
 
                 //notify adapter after mark as favourite or not.
                 notifyDataSetChanged()
             }
 
-            cardRestaurant.setOnClickListener{
+            cardRestaurant.setOnClickListener {
                 val intent = Intent(context, DetailsActivity::class.java)
                 intent.putExtra("id", restaurants.get(adapterPosition).id)
                 context.startActivity(intent)
             }
         }
+
         fun bind(position: Int) {
-            val restaurant = restaurants.get(position)
-            textRestro.text = restaurant.Name
-            textCost.text = restaurant.costForTwo.toString()
+            val restaurant = restaurants[position]
+            textRestro.text = restaurant.name
+            textCost.text = restaurant.costForOne.toString()
             textRating.text = restaurant.rating
-            Picasso.get().load(restaurant.image).error(R.drawable.food).into(imgRestaurent)
-            if (restaurant.isFavourite){
+            Picasso.get().load(restaurant.imageUrl).error(R.drawable.food).into(imgRestaurent)
+            if (restaurant.isFavourite) {
                 imgisfav.setImageResource(R.drawable.ic_fav_filled)
-            } else{
+            } else {
                 imgisfav.setImageResource(R.drawable.ic_fav_one)
             }
         }
     }
-//   these should not be here use a callback and add this code to fragment
-     class DBAsyncTask(context: Context, val restaurantEntity: RestaurantEntity, val mode: Int) :
+
+    //   these should not be here use a callback and add this code to fragment
+    class DBAsyncTask(context: Context, val restaurantEntity: RestaurantEntity, val mode: Int) :
         AsyncTask<Void, Void, Boolean>() {
 
         val db = Room.databaseBuilder(context, RestaurantDatabase::class.java, "res-db").build()
@@ -101,10 +92,10 @@ class RestaurentsAdapter : RecyclerView.Adapter<RestaurentsAdapter.DashboardView
         override fun doInBackground(vararg params: Void?): Boolean {
 
 
-         /*   Mode 1 -> Check DB if the book is favourite or not
-            Mode 2 -> Save the book into DB as favourite
-            Mode 3 -> Remove the favourite book
-            */
+            /*   Mode 1 -> Check DB if the book is favourite or not
+               Mode 2 -> Save the book into DB as favourite
+               Mode 3 -> Remove the favourite book
+               */
 
             when (mode) {
 
