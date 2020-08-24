@@ -89,7 +89,7 @@ class DetailsActivity : AppCompatActivity() {
             val jsonparams = JSONObject()
             jsonparams.put("restaurantid", restaurantId)
             val jsonRequest =
-                object : JsonObjectRequest(Request.Method.POST, url, jsonparams, Response.Listener {
+                object : JsonObjectRequest(Request.Method.GET, url, jsonparams, Response.Listener {
                     try {
                         val success = it.getBoolean("success")
                         if (success) {
