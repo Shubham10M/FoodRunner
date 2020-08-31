@@ -87,6 +87,7 @@ class RegisterActivity : BaseActivity() {
                     ) {
                         clLoading.visibility = View.GONE
                         if (response.isSuccessful) {
+                            //save into the preferences and finish this activity.
                             Log.e("Register Activity", response.body()?.data.toString())
                         } else {
                             Toast.makeText(
@@ -109,20 +110,12 @@ class RegisterActivity : BaseActivity() {
                 })
             } else {
                 Utils.noInternetDialog(this, { _, _ ->
+                    setResult(RESULT_OK)
                     finish()
                 }, { _, _ ->
 
                 })
             }
-            /*val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("data", "register")
-            bundle.putString("name", etName.text.toString())
-            bundle.putString("mobile", etPhoneNumber.text.toString())
-            bundle.putString("password", etPassword.text.toString())
-            bundle.putString("address", etAddress.text.toString())
-            intent.putExtra("details", bundle)
-            startActivity(intent)*/
         }
     }
 }
