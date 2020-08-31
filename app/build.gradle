@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -25,9 +26,9 @@ android {
     }
 
     compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -35,7 +36,9 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.2.5'
     def room_version = "2.2.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
 
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -65,7 +68,6 @@ dependencies {
 
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
-
 
 
 }

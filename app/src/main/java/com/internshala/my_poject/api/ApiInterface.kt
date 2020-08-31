@@ -1,19 +1,20 @@
 package com.internshala.my_poject.api
 
 import com.internshala.my_poject.model.Example
+import com.internshala.my_poject.model.RegisterRequest
+import com.internshala.my_poject.model.UserProfile
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  * Created by Rahul Abrol on 24/8/20.
  */
 
 const val RESTAURANTS = "restaurants/"
+const val REGISTER = "register/"
 const val FETCH_RESULT = "fetch_result/"
 
 interface ApiInterface {
@@ -28,6 +29,10 @@ interface ApiInterface {
     fun fetchRestaurants(
         @Header("token") token: String
     ): Call<Example>
+
+//    @FormUrlEncoded
+    @POST("$REGISTER$FETCH_RESULT")
+    fun registerUser(@Body user: RegisterRequest): Call<UserProfile>
 
 }
 

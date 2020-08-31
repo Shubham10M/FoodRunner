@@ -6,26 +6,23 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.room.Room
 import com.internshala.my_poject.R
-import com.internshala.my_poject.api.ApiClient
-import com.internshala.my_poject.api.ApiInterface
+import com.internshala.my_poject.base.BaseActivity
 import com.internshala.my_poject.database.RestaurantDatabase
 import com.internshala.my_poject.database.RestaurantEntity
 import com.internshala.my_poject.model.Example
 import com.internshala.my_poject.util.ConnectionManager
+import com.internshala.my_poject.util.Utils
 import kotlinx.android.synthetic.main.activity_details.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailsActivity : AppCompatActivity() {
+class DetailsActivity : BaseActivity() {
 
     var restaurantId: String? = null
-    private val request = ApiClient.buildService(ApiInterface::class.java)
+//    private val request = ApiClient.buildService(ApiInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -220,15 +217,11 @@ class DetailsActivity : AppCompatActivity() {
                 }
             queue.add(jsonRequest)*/
         } else {
-            val builder = AlertDialog.Builder(this@DetailsActivity)
-            builder.setTitle("Error")
-            builder.setMessage("No Internet Connection found. Please connect to the internet and re-open the app.")
-            builder.setCancelable(false)
-            builder.setPositiveButton("Ok") { _, _ ->
-                ActivityCompat.finishAffinity(this@DetailsActivity)
-            }
-            builder.create()
-            builder.show()
+            Utils.noInternetDialog(this, { _, _ ->
+                finish()
+            }, { _, _ ->
+
+            })
         }
 
         class DBAsyncTask(context: Context, val restaurantEntity: RestaurantEntity, val mode: Int) :
