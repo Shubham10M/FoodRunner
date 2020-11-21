@@ -133,7 +133,6 @@ class DashboardFragment : Fragment() {
 
     }
 
-    //comment always why you are writing it and what is the use of this function,class or variable.
     class GetAllFavAsyncTask(
         context: Context
     ) : AsyncTask<Void, Void, List<Int>>() {

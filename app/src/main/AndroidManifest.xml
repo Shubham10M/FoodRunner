@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/food_runner_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".activity.ConfirmActivity"></activity>
         <activity android:name=".activity.PlaceOrderActivity" />
         <activity android:name=".activity.ForgotPasswardActivity" />
@@ -20,6 +21,8 @@
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.DetailsActivity" />
         <activity android:name=".activity.LoginActivity" />
+=======
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
         <activity android:name=".activity.SplashActivity">
 
             <intent-filter>
@@ -28,6 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.PlaceOrderActivity" />
+        <activity android:name=".activity.OtpconfirmActivity" />
+        <activity android:name=".activity.ForgotPasswardActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.DashboardActivity" />
+        <activity android:name=".activity.DetailsActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

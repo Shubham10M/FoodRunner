@@ -39,8 +39,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.2.0'
     def room_version = "2.2.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'com.google.firebase:firebase-database:19.3.1'
+
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+//>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
     kapt "androidx.room:room-compiler:$room_version"
     // For Kotlin use kapt instead of annotationProcessor
 
@@ -79,8 +83,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
+
     implementation 'com.android.support:multidex:1.0.3'
 //    implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
 //    implementation 'com.google.firebase:firebase-database-ktx:19.2.1'
+
 
 }

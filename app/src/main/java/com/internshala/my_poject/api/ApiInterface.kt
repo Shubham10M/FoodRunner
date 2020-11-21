@@ -1,19 +1,28 @@
 package com.internshala.my_poject.api
 
 import com.internshala.my_poject.model.Example
+<<<<<<< HEAD
 import com.internshala.my_poject.model.UserInfo
 import com.internshala.my_poject.util.PLACE_ORDER
+=======
+import com.internshala.my_poject.model.RegisterRequest
+import com.internshala.my_poject.model.UserProfile
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+<<<<<<< HEAD
 import java.util.*
 
+=======
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
 
 
 const val RESTAURANTS = "restaurants/"
+const val REGISTER = "register/"
 const val FETCH_RESULT = "fetch_result/"
 
 interface ApiInterface {
@@ -29,9 +38,16 @@ interface ApiInterface {
         @Header("token") token: String
     ): Call<Example>
 
+<<<<<<< HEAD
     @POST("$RESTAURANTS$PLACE_ORDER")
     fun addUser(@Header("token") token: String ="9bf534118365f1",
         @Body userData: UserInfo): Call<Any>
+=======
+//    @FormUrlEncoded
+    @POST("$REGISTER$FETCH_RESULT")
+    fun registerUser(@Body user: RegisterRequest): Call<UserProfile>
+
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
 }
 
 

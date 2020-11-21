@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+<<<<<<< HEAD
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,17 +16,26 @@ import com.internshala.my_poject.api.ApiClient
 import com.internshala.my_poject.api.ApiInterface
 import com.internshala.my_poject.fragment.DashboardFragment
 import com.internshala.my_poject.model.Datum
+=======
+import androidx.room.Room
+import com.internshala.my_poject.R
+import com.internshala.my_poject.base.BaseActivity
+import com.internshala.my_poject.database.RestaurantDatabase
+import com.internshala.my_poject.database.RestaurantEntity
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
 import com.internshala.my_poject.model.Example
 import com.internshala.my_poject.util.ConnectionManager
+import com.internshala.my_poject.util.Utils
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_details.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailsActivity : AppCompatActivity() {
+class DetailsActivity : BaseActivity() {
 
     var restaurantId: String? = null
+<<<<<<< HEAD
     private val DetailsAdapter by lazy {
         DetailsAdapter(){
            handleVisibility()
@@ -46,6 +56,9 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private val request = ApiClient.buildService(ApiInterface::class.java)
+=======
+//    private val request = ApiClient.buildService(ApiInterface::class.java)
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,9 +152,19 @@ class DetailsActivity : AppCompatActivity() {
                 builder.setPositiveButton("Ok") { _, _ ->
                     ActivityCompat.finishAffinity(this@DetailsActivity)
                 }
+<<<<<<< HEAD
                 builder.create()
                 builder.show()
             }
+=======
+            queue.add(jsonRequest)*/
+        } else {
+            Utils.noInternetDialog(this, { _, _ ->
+                finish()
+            }, { _, _ ->
+
+            })
+>>>>>>> 8a1e3206c2aff05ad4a5fe10d365a9bfe67c761a
         }
 
     }
