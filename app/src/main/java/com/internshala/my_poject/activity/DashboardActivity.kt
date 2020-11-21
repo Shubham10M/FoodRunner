@@ -104,7 +104,6 @@ class DashboardActivity : AppCompatActivity(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
     fun openDashboard (){
-        val fragment = DashboardFragment()
         val transaction =supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame, DashboardFragment())
          transaction.commit()

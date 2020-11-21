@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ConfirmActivity"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/img_mark"
+        android:layout_width="500dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="190dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/mark_logo"
+        />
+    <TextView
+        android:id="@+id/text_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Order has Been successfully placed"
+        android:layout_below="@+id/img_mark"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginLeft="35sp"
+        />
+      <Button
+          android:id="@+id/button_ok"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/text_read"
+          android:layout_marginTop="150dp"
+          android:layout_marginLeft="139dp"
+          android:background="@color/colorPrimaryLight"
+          android:outlineProvider="background"
+          android:text="OK"
+          android:textStyle="bold"
+          android:textColor="#ffffff"
+          android:textSize="18sp"/>
+</RelativeLayout>

@@ -13,14 +13,15 @@
         android:roundIcon="@mipmap/food_runner_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PlaceOrderActivity"></activity>
-        <activity android:name=".activity.OtpconfirmActivity" />
+        <activity android:name=".activity.ConfirmActivity"></activity>
+        <activity android:name=".activity.PlaceOrderActivity" />
         <activity android:name=".activity.ForgotPasswardActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.DetailsActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SplashActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

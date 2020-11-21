@@ -1,17 +1,17 @@
 package com.internshala.my_poject.api
 
 import com.internshala.my_poject.model.Example
+import com.internshala.my_poject.model.UserInfo
+import com.internshala.my_poject.util.PLACE_ORDER
 import okhttp3.OkHttpClient
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import retrofit2.http.*
+import java.util.*
 
-/**
- * Created by Rahul Abrol on 24/8/20.
- */
+
 
 const val RESTAURANTS = "restaurants/"
 const val FETCH_RESULT = "fetch_result/"
@@ -29,7 +29,11 @@ interface ApiInterface {
         @Header("token") token: String
     ): Call<Example>
 
+    @POST("$RESTAURANTS$PLACE_ORDER")
+    fun addUser(@Header("token") token: String ="9bf534118365f1",
+        @Body userData: UserInfo): Call<Any>
 }
+
 
 object ApiClient {
     private val client = OkHttpClient.Builder().build()

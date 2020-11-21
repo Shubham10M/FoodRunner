@@ -40,6 +40,7 @@ class FavouritesFragment : Fragment() {
 
 
 
+
         return view
     }
     class FavouritesAsync(context: Context) : AsyncTask<Void, Void, List<RestaurantEntity>>() {

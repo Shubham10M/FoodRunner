@@ -8,3 +8,4 @@ const val RESET_PASSWORD = "$NETWORK_IP/reset_password/fetch_result"
 const val FETCH_RESTAURANTS_URL = "$NETWORK_IP/restaurants/fetch_result"
 const val PLACE_ORDER = "$NETWORK_IP/place_order/fetch_result"
 const val FETCH_PREVIOUS_ORDERS = "$NETWORK_IP/orders/fetch_result/"
+

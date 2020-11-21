@@ -92,9 +92,9 @@ class RestaurentsAdapter() : RecyclerView.Adapter<RestaurentsAdapter.DashboardVi
         override fun doInBackground(vararg params: Void?): Boolean {
 
 
-            /*   Mode 1 -> Check DB if the book is favourite or not
-               Mode 2 -> Save the book into DB as favourite
-               Mode 3 -> Remove the favourite book
+            /*   Mode 1 -> Check DB if the restaurant is favourite or not
+               Mode 2 -> Save the restaurant into DB as favourite
+               Mode 3 -> Remove the favourite restaurant
                */
 
             when (mode) {

@@ -3,21 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     tools:context=".fragment.ProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="353dp"
+        android:layout_marginTop="60dp"
         android:padding="4dp">
 
         <ImageView
             android:id="@+id/imgUserImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circular_image"
             android:src="@drawable/profile_pic" />
 
         <LinearLayout
@@ -26,10 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgUserImage"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="4dp"
+            tools:ignore="NotSibling">
 
 
             <TextView
@@ -37,14 +41,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_boundary_background"
+                android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="@string/name"
+
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                android:gravity="center_horizontal" />
-
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/txtPhone"
@@ -52,12 +55,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/text_boundary_background"
+                android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="@string/dummy_phone"
+
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                android:gravity="center_horizontal" />
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -65,12 +68,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/text_boundary_background"
+                android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="@string/email"
+
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                android:gravity="center_horizontal" />
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/txtAddress"
@@ -80,7 +83,7 @@
                 android:background="@drawable/text_boundary_background"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/address"
+
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black" />

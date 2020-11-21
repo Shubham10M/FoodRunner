@@ -15,21 +15,40 @@
     android:contentDescription="@string/app_name"
     android:src="@drawable/app_logo"/>
 
+<!--    <EditText-->
+<!--android:id="@+id/etMobileNumber"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginLeft="20dp"-->
+<!--android:layout_marginRight="20dp"-->
+<!--android:layout_marginTop="12dp"-->
+<!--android:hint="@string/mobile_number"-->
+<!--android:inputType="number"-->
+<!--android:background="@drawable/text_boundary_background"-->
+<!--android:maxLength="10"-->
+<!--android:drawableLeft="@drawable/ic_number"-->
+<!--android:drawablePadding="3dp"-->
+<!--android:maxLines="1"-->
+<!--android:padding="10dp"/>-->
     <EditText
-android:id="@+id/etMobileNumber"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginLeft="20dp"
-android:layout_marginRight="20dp"
-android:layout_marginTop="12dp"
-android:hint="@string/mobile_number"
-android:inputType="number"
-android:background="@drawable/text_boundary_background"
-android:maxLength="10"
-android:drawableLeft="@drawable/ic_number"
-android:drawablePadding="3dp"
-android:maxLines="1"
-android:padding="10dp"/>
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etName"
+        android:background="@drawable/text_boundary_background"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="3dp"
+        android:maxLines="1"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="10dip"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"/>
+
 
 <EditText
 android:id="@+id/etPassword"
@@ -39,8 +58,7 @@ android:layout_marginLeft="20dp"
 android:layout_marginRight="20dp"
 android:layout_marginTop="12dp"
 android:hint="@string/password"
-android:inputType="numberPassword"
-android:maxLength="6"
+android:inputType="textPassword"
 android:background="@drawable/text_boundary_background"
 android:maxLines="1"
 android:drawableLeft="@drawable/ic_passward"

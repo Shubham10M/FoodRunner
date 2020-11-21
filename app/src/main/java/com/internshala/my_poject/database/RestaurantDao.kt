@@ -19,4 +19,8 @@ interface RestaurantDao {
 
     @Query("SELECT * FROM restaurant WHERE id = :resId")
     fun getRestaurantById(resId: String): RestaurantEntity
+
+
+
+
 }
