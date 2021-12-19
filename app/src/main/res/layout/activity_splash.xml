@@ -24,5 +24,16 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/txtOfname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAppName"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="274dp"
+        android:text="Made By Shubham"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
